@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('subject', 200);
             $table->text('text');
             $table->timestamps();
+            $table->softDeletesDateTime();
         });
     }
 

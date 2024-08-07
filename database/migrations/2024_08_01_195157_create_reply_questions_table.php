@@ -21,6 +21,7 @@ return new class extends Migration
                 ->constrained();
             $table->text('text');
             $table->timestamps();
+            $table->softDeletesDateTime();
         });
     }
 
