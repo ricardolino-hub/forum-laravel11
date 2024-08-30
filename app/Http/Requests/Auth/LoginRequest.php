@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
 
         if (isEmail($this->email_or_username)) {
             $values['email'] = $this->email_or_username;
-        }else {
+        } else {
             $values['username'] = $this->email_or_username;
         }
 
