@@ -13,12 +13,14 @@ class Question extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
-    protected $filleable = [
+    protected $fillable = [
         'user_id',
         'category_id',
         'subject',
         'text',
     ];
+
+    protected $with = ['category'];
 
     public function user(): BelongsTo
     {
