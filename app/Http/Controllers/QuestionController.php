@@ -15,7 +15,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::where('user_id', Auth::user()->id)->get();
+        $questions = Question::where('user_id', Auth::user()->id)->paginate(10);
         return view('question.index', compact('questions'));
     }
 

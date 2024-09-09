@@ -1,28 +1,21 @@
-<h1>Pergunta</h1>
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Editar Pergunta') }}
+            </h2>
+            <x-link-button link="questions.index">Listagem de Perguntas</x-link-button>
+        </div>
+    </x-slot>
 
-@if ($errors->any())
-    <div>
-        <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-    @endforeach
-        </ul>
+    <br>
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <x-error-message />
+        <form action="{{ route('questions.update', $question->id) }}" method="post">
+            @csrf
+            @method('PUT')
+            @include('question.partials.form')
+        </form>
     </div>
-@endif
-
-<a href="{{ route('questions.index') }}">Listagem de perguntas</a>
-<br>
-<br>
-
-<form action="{{ route('questions.update', $question->id) }}" method="post">
-    @csrf
-    @method('PUT')
-    <input type="text" name="subject" value="{{ $question->subject }}"><br>
-    <textarea name="text" col="30" rows="10">{{ $question->text }}</textarea>
-    <select name="category_id" id="">
-        @foreach ($categories as $category)
-            <option value="{{ $category->id }}" @if ($question->category->id == $category->id) selected @endif>{{ $category->name }}</option>
-        @endforeach
-    </select><br>
-    <button type="submit">Enviar</button>
-</form>
+    <br>
+</x-app-layout>
