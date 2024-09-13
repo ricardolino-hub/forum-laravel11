@@ -22,7 +22,7 @@
                 @forelse ($questions as $question)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-70">
                         <td class="px-6 py-4">{{ $question->subject }}</td>
-                        <td class="px-6 py-4">{{ $question->short_text }}</td>
+                        <td class="px-6 py-4">{{ $question->shortText }}</td>
                         <td class="px-6 py-4">{{ $question->category->name }}</td>
                         <td class="px-6 py-4 flex justify-center space-x-2">
                             <a href="{{ route('questions.show', $question->id) }}">
