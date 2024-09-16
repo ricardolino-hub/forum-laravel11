@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreReplyQuestionRequest;
 use App\Models\ReplyQuestion;
 use App\Models\Question;
+use App\Mail\QuestionRepliedMail;
+use Illuminate\Support\Facades\Mail;
+use App\Events\QuestionReplied;
 
 class ForumController extends Controller
 {
@@ -31,10 +34,12 @@ class ForumController extends Controller
             abort(404);
         }
 
-        ReplyQuestion::create([
+        $createdReply = ReplyQuestion::create([
             'user_id' => Auth::id(),
             ...$request->validated()
         ]);
+
+        QuestionReplied::dispatch($question->user, $createdReply);
 
         return redirect()->back()->with('success', 'Resposta enviada com sucesso!');
     }
